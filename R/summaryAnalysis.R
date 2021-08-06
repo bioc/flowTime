@@ -45,7 +45,9 @@ flsummary <- function(flowset, channel) {
   }
 
   fl <- fsApply(flowset, meanMedianSD)
-  if(!is.null(channel)) {fl <- fl %>% as_tibble() %>%
+  if(!is.na(channel)) {
+    # TODO: add error handling
+    fl <- fl %>% as_tibble() %>%
     dplyr::select(dplyr::contains(c("name", channel)))}
 
   name <- fsApply(flowset, function(x) keyword(x)$GUID)
